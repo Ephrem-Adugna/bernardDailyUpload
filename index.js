@@ -37,8 +37,13 @@ get(child(dbRef, `images`)).then(snapshot=>{
     imageContainer.innerHTML = "";
   data.forEach((image, id) => {
     imageContainer.innerHTML += `<img class="image" id="${id}" src="data:image/png;base64, ${image}"/>`;
+  });
+  data.forEach((image, id) => {
     document.getElementById(id.toString()).addEventListener("click", ()=>{deleteImage(id)});
   });
+  }
+  else{
+    getAll();
   }
 });
 }
@@ -56,6 +61,11 @@ getAll();
     const data = snapshot.val();
     if(Array.isArray(data)){
     images = data;
+    images.push(imageData);
+    set(ref(db, 'images/'), images);
+    getAll();
+    }
+    else{
     images.push(imageData);
     set(ref(db, 'images/'), images);
     getAll();
