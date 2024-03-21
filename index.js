@@ -78,7 +78,7 @@ getAll();
     };
  }
 async function reduce(file, size){
-  size ??= 256
+  size ??= 512
 
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
